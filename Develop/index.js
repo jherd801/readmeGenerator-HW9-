@@ -1,10 +1,13 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const axios = require("axios");
+// const axios = require("axios");
+const util = require("util");
 
+const writeFileAsync = util.promisify(fs.writeFile);
 
 // Command line questions to build readme content from user responses
-inquirer.prompt([
+function promptUser() {
+    return inquirer.prompt([
     {
         type: "input",
         name: "username",
@@ -49,77 +52,67 @@ inquirer.prompt([
             "None"
         ]
     },
-]).then(function(data) {
+]);
+};
 
-    let gitHubUsername = data.username;
+// .then(function(data) {
 
-    const queryUrl = `https://api.github.com/users/${gitHubUsername}`;
+//     let gitHubUsername = data.username;
 
-    axios.get(queryUrl).then(function(res) {
+//     const queryUrl = `https://api.github.com/users/${gitHubUsername}`;
 
-      const avatarURL = res.data.avatar_url;
+//     axios.get(queryUrl).then(function(res) {
 
-      console.log(avatarURL);
-  });
-});
+//       const avatarURL = res.data.avatar_url;
+
+//       console.log(avatarURL);
+//   });
+
+//   return data;
   
-//   .then(function(data) {
-
-//     var fileName = data.title.toLowerCase().split(' ').join('') + ".md";
-
-//     fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
-
-//         if (err) {
-//             return console.log(err);
-//         }
-//     });
-
-//     var username = data.username;
-//     console.log(username);
-// });
+// })
 
 
 // Function to input user responses into structured markdown file
-// function generateMarkdown(data) {
-//     `
-//     # Project Title: ${data.title}
+function generateMarkdown(answers) {
+    return `
+    # Project Title: ${answers.title}
 
-//     ## Project Description:
-//     ${data.description}
+    ## Project Description:
+    ${answers.description}
 
-//     ## Table of Contents
-//     * [Installation](#installation)
-//     * [Usage](#usage)
-//     * [Contributors](#contributors)
-//     * [License](#license)
+    ## Table of Contents
+    * [Installation](#installation)
+    * [Usage](#usage)
+    * [Contributors](#contributors)
+    * [License](#license)
     
-//     ## Installation
-//     ${data.installation}
+    ## Installation
+    ${answers.installation}
 
-//     ## Usage
-//     ${data.usage}
+    ## Usage
+    ${answers.usage}
 
-//     ## Contributors
-//     ${data.contributors}
+    ## Contributors
+    ${answers.contributors}
 
-//     ## License
-//     ${data.license}
-
-
-//     ## Github Information
-//     * [Username](#username)
-//     * https://avatars2.githubusercontent.com/u/60113759?s=460&u=520757564a6f39cd937d3c631712a52e94eb9f9f&v=4
-//     `
-// };
-
-// generateMarkdown();
+    ## License
+    ${answers.license}
 
 
-// function writeToFile(fileName, data) {
-// }
+    ## Github Information
+    * [Username](#username)
+    * https://avatars2.githubusercontent.com/u/60113759?s=460&u=520757564a6f39cd937d3c631712a52e94eb9f9f&v=4
+    `
+};
 
-// function init() {
+promptUser()
+.then(function(answers) {
+    const markdown = generateMarkdown(answers);
 
-// }
-
-// init();
+    return writeFileAsync("README.md", markdown);
+})
+.then(function() {
+})
+.catch(function(err) {
+});
