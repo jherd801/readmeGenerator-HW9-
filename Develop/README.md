@@ -1,8 +1,8 @@
 
-    # Project Title: asdfjokhdf
+    # Project Title: a
 
     ## Project Description:
-    ds
+    a
 
     ## Table of Contents
     * [Installation](#installation)
@@ -11,19 +11,20 @@
     * [License](#license)
     
     ## Installation
-    fs
+    a
 
     ## Usage
-    df
+    a
 
     ## Contributors
-    sd
+    a
 
     ## License
     Apache 2.0
 
 
     ## Github Information
-    * [Username](#username)
-    * https://avatars2.githubusercontent.com/u/60113759?s=460&u=520757564a6f39cd937d3c631712a52e94eb9f9f&v=4
+    * Github username: jherd801
+    * Github profile picture URL: https://avatars.githubusercontent.com/jherd801
+    * ![Image description](https://avatars.githubusercontent.com/jherd801.png)
     

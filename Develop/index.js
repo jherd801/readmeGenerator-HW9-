@@ -101,8 +101,9 @@ function generateMarkdown(answers) {
 
 
     ## Github Information
-    * [Username](#username)
-    * https://avatars2.githubusercontent.com/u/60113759?s=460&u=520757564a6f39cd937d3c631712a52e94eb9f9f&v=4
+    * Github username: ${answers.username}
+    * Github profile picture URL: https://avatars.githubusercontent.com/${answers.username}
+    * ![Image description](https://avatars.githubusercontent.com/${answers.username}.png)
     `
 };
 
